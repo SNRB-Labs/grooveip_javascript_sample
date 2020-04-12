@@ -14,12 +14,21 @@ class ApiClient {
     buildNumbersInventoryUrl(){
 
         let page = '1';
-        let quantity = '100';
+        let quantity = '1000';
         let requestId = this.generateRequestId();
 
         let hash = crypto.createHash('sha256').update(`${this.clientId}${page}${quantity}${requestId}`).digest('hex');
 
         return `${BASE_URL}/numbers/inventory/${this.clientId}/page/${page}/quantity/${quantity}/requestId/${requestId}/hash/${hash}`;
+    }
+
+    buildSearchNumbersUrl(areaCode){
+        
+        let requestId = this.generateRequestId();
+
+        let hash = crypto.createHash('sha256').update(`${this.clientId}${areaCode}${requestId}${this.secret}`).digest('hex');
+
+        return `${BASE_URL}/numbers/list/${this.clientId}/areaCode/${areaCode}/requestId/${requestId}/hash/${hash}`;
     }
 
     generateRequestId() {
