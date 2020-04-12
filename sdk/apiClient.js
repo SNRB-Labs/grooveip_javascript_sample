@@ -1,3 +1,5 @@
+import ReserveNumberRequest from './numberReserveRequest';
+
 const BASE_URL = 'http://dev-commercial-api.azurewebsites.net/api';
 const crypto = require('crypto');
 
@@ -29,6 +31,17 @@ class ApiClient {
         let hash = crypto.createHash('sha256').update(`${this.clientId}${areaCode}${requestId}${this.secret}`).digest('hex');
 
         return `${BASE_URL}/numbers/list/${this.clientId}/areaCode/${areaCode}/requestId/${requestId}/hash/${hash}`;
+    }
+
+    buildReserveNumberRequest(phoneNumber, areaCode){
+        
+        let requestId = this.generateRequestId();
+
+        let hash = crypto.createHash('sha256').update(`${this.clientId}${phoneNumber}${areaCode}${requestId}${this.secret}`).digest('hex');
+
+        let request = new ReserveNumberRequest(`${BASE_URL}/numbers/reserve/`, this.clientId, phoneNumber, areaCode, requestId, hash)
+
+        return request;
     }
 
     generateRequestId() {
