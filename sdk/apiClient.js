@@ -21,7 +21,7 @@ class ApiClient {
 
         let hash = crypto.createHash('sha256').update(`${this.clientId}${page}${quantity}${requestId}${this.secret}`).digest('hex');
         let url = `${BASE_URL}/numbers/inventory/${this.clientId}/page/${page}/quantity/${quantity}/requestId/${requestId}/hash/${hash}`;
-        console.log(url);
+        
         return url;
     }
 

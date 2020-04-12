@@ -10,6 +10,21 @@ class NumbersProvider {
         this.apiClient = apiClient;
     }
 
+    reserveNumber(number, areaCode){
+        return new Promise((resolve, reject) => {
+            let data = this.apiClient.buildReserveNumberRequest(number, areaCode);
+            console.log(data);
+            axios.post(data.url, {
+                data
+            })
+            .then((response) => {
+                resolve(response);
+            }).catch((error) => {
+                reject(error);
+            });
+        });
+    }
+
     getMyNumbers(){
         return new Promise((resolve, reject) => {
             axios.get(this.apiClient.buildNumbersInventoryUrl())
@@ -30,8 +45,7 @@ class NumbersProvider {
             }).catch((error) => {
                 reject(error);
             });
-        });
-        
+        });   
     }
 }
 

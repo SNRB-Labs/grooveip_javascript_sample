@@ -9,6 +9,38 @@ describe('NumbersProvider for making calls to the NUMBERS endpoint', () => {
  
     let client = new ApiClient('00000000-0000-0000-0000-0000000000000', '000000');
  
+    it(`should reserve a number making it belong to the customer`, () => {
+
+        let data = {
+            "UserName": "18455558688",
+            "Password": "PA33WORD",
+            "PhoneNumber": "+18455558688",
+            "UserId": 5446093,
+            "UserToken": "3cb20f97-5555-5555-5555-5a21751063d7",
+            "Sip": {
+                "UserName": "gvip-5555555-5555",
+                "SipPassword": "PA33WORD",
+                "Realm": "prd-evolution.bwapp.bwsip.io",
+                "EndpointId": "re-4abcdefghijclmnopwbiuxoya",
+                "Password": "PA33WORD"
+            },
+            "SipSecondary": {
+                "UserName": "snrb-5446093-7660",
+                "SipPassword": "PA33WORD",
+                "Realm": "prd-evolution.bwapp.bwsip.io",
+                "EndpointId": "re-ronvm2abcdefghijclmnopm7a",
+                "Password": "PA33WORD"
+            },
+            "Usage": null
+        };
+
+        axios.post.mockResolvedValue(data);
+
+        let provider = new NumbersProvider(client);
+
+        return expect(provider.reserveNumber('+18455558688', '845')).resolves.toBe(data);
+    })
+
     it(`should return an array of numbers from an area code`, () => {
         
         let data = ['+18453518688', '+18453518689', '+18453518690', '+18453518694', '+18453518696', '+18453518704', '+18453518705', '+18453518707', '+18453518708', '+18453518709'];

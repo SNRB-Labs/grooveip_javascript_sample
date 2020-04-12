@@ -2,15 +2,15 @@ class ReserveNumberRequest {
 
     url;
     customerId;
-    number; 
+    phoneNumber; 
     areaCode; 
     requestId; 
     hash;
 
-    constructor(url, customerId, number, areaCode, requestId, hash){
+    constructor(url, customerId, phoneNumber, areaCode, requestId, hash){
         this.url = url;
         this.customerId = customerId;
-        this.number = number;
+        this.phoneNumber = phoneNumber;
         this.areaCode = areaCode;
         this.requestId = requestId;
         this.hash = hash;
