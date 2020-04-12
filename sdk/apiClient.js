@@ -1,6 +1,6 @@
 import ReserveNumberRequest from './numberReserveRequest';
 
-const BASE_URL = 'http://dev-commercial-api.azurewebsites.net/api';
+const BASE_URL = 'https://commercial.snrblabs.com/api';
 const crypto = require('crypto');
 
 class ApiClient {
@@ -29,7 +29,7 @@ class ApiClient {
         let requestId = this.generateRequestId();
 
         let hash = crypto.createHash('sha256').update(`${this.clientId}${areaCode}${requestId}${this.secret}`).digest('hex');
-
+  
         return `${BASE_URL}/numbers/list/${this.clientId}/areaCode/${areaCode}/requestId/${requestId}/hash/${hash}`;
     }
 
