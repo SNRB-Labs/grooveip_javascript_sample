@@ -20,6 +20,27 @@ describe('NumbersProvider for making calls to the NUMBERS endpoint', () => {
         return expect(provider.searchNumbers('845')).resolves.toBe(data);
     });
 
+    it(`should list all numbers that belong to the customer`, () => {
+
+        let data = [
+            {
+                "PhoneNumber": "+55516132064",
+                "CreationDate": "6/14/2019 12:54:06 AM"
+            },
+            {
+                "PhoneNumber": "+55552410715",
+                "CreationDate": "6/18/2019 12:02:16 AM"
+            }];
+
+        axios.get.mockResolvedValue(data);
+
+
+        let provider = new NumbersProvider(client);
+
+        return expect(provider.getMyNumbers()).resolves.toBe(data);
+
+    });
+
 });
 
 describe('ApiClient for building REST calls', () => {
@@ -32,7 +53,7 @@ describe('ApiClient for building REST calls', () => {
 
     it('should build numbers inventory url', () => {
         
-        expect('https://commercial.snrblabs.com/api/numbers/inventory/000000/page/1/quantity/1000/requestId/1234/hash/4dc1dfb49d6a4e0695f4ba70c730a0cace6ba5d67467907ef96b7136dd30b8a7').
+        expect('https://commercial.snrblabs.com/api/numbers/inventory/000000/page/0/quantity/1000/requestId/1234/hash/d67cc021394dd6ae7291911d0680023ffb72a27f7770eb43716f3a49175b9eda').
             toBe(client.buildNumbersInventoryUrl());
     });
 

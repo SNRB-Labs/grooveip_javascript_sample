@@ -10,6 +10,17 @@ class NumbersProvider {
         this.apiClient = apiClient;
     }
 
+    getMyNumbers(){
+        return new Promise((resolve, reject) => {
+            axios.get(this.apiClient.buildNumbersInventoryUrl())
+            .then((response) => {
+                resolve(response);
+            }).catch((error) => {
+                reject(error);
+            });
+        });
+    }
+
     searchNumbers(areaCode){
 
         return new Promise((resolve, reject) => {
@@ -19,7 +30,6 @@ class NumbersProvider {
             }).catch((error) => {
                 reject(error);
             });
-
         });
         
     }
