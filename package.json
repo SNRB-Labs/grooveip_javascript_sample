@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "node ./server.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
     "jest": "^25.3.0"
   },
   "dependencies": {
-    "axios": "^0.19.2"
+    "axios": "^0.19.2",
+    "express": "^4.17.1"
   }
 }
